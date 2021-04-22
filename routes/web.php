@@ -38,7 +38,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['middleware'=>['auth']],function(){
 //Cia rasosi visi raoutai
+
+
     Route::resource('themes','App\Http\Controllers\ThemeController');
+    Route::resource('posts','App\Http\Controllers\PostController');
+    Route::resource('mods','App\Http\Controllers\ModsController');
+
 
 
 

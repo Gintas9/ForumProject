@@ -16,6 +16,7 @@ class CreatePost extends Migration
         Schema::create('post', function (Blueprint $table) {
             $table->id();
             $table->integer('tid');
+            $table->integer('uid');
             $table->timestamps();
             $table->string('title');
             $table->string('text');
