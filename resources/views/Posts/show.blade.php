@@ -16,9 +16,13 @@
                     <button class="btn btn-danger">Delete</button>
                 </form>
             @endif
+                <br>
+                <br>
+                <br>
                 <div class="jumbotron jumbotron-fluid">
                     <div class="container">
                         <h1 class="display-4">{{$post->title}}</h1>
+                        <hr>
                         <p class="lead">{{$post->text}}</p>
                     </div>
                 </div>

@@ -15,6 +15,7 @@ class ModsController extends Controller
 {
     private $query='select * from themes';
     public static function isUserCreator($tid){
+        //checks if user is theme creator
         $user=Auth::user();
         $isCreator=DB::table('themes')->where('id','=',$tid)->where('owner','=',$user->id)->count();
         if($isCreator==0){
@@ -24,6 +25,7 @@ class ModsController extends Controller
         }
     }
     public static function isUserPostCreator($pid){
+        //checks if user is post creator
         $user=Auth::user();
         $isCreator=DB::table('posts')->where('id','=',$pid)->where('uid','=',$user->id)->count();
         if($isCreator==0){
@@ -64,6 +66,7 @@ class ModsController extends Controller
             }
 
     public static function getUsersMods($tid){
+        //gets users that are mods of tid
         $user=Auth::user();
         $query='select * from mods where tid='.$tid;
         $p=DB::raw($query);
@@ -91,11 +94,11 @@ class ModsController extends Controller
 
 
     }
-
+    //gets Mod object
     public static function getMod($uid,$tid){
 
         //$mod=Mod::where('uid','=',$uid)->where('tid','=',$tid)->first();
-        $mod=DB::table('mods')->where('uid',$uid)->first();
+        $mod=DB::table('mods')->where('uid',$uid)->where('tid',$tid)->first();
         $mo=$mod;
        return $mo;
 

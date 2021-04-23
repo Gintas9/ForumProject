@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        Parodymai
 
         <div class="col-md-8">
 
@@ -14,7 +13,8 @@
                 <form action="{{route('themes.destroy',$theme)}}" method="POST">
                     @method('DELETE')
                     @csrf
-
+                    <hr>
+                    <br>
                     <button class="btn btn-danger">Delete</button>
                 </form>
                 <form method="POST" action="{{route('mods.store')}}">
@@ -39,6 +39,7 @@
             <div class="jumbotron jumbotron-fluid">
                 <div class="container">
                     <h1 class="display-4">{{$theme->topicname}}</h1>
+                    <hr>
                     <p class="lead">{{$theme->description}}</p>
                 </div>
             </div>
