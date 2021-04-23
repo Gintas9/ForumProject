@@ -4,6 +4,11 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+
+            <a class="btn btn-primary" href="{{route('themes.index')}}">Topics</a>
+
+        </div>
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
 

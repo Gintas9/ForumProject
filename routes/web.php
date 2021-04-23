@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ThemeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+//php artisan route:list
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -20,3 +24,33 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::group(['middleware'=>['auth']],function(){
+//Cia rasosi visi raoutai
+
+
+    Route::resource('themes','App\Http\Controllers\ThemeController');
+    Route::resource('posts','App\Http\Controllers\PostController');
+    Route::resource('mods','App\Http\Controllers\ModsController');
+
+
+
+
+
+//
+
+
+});
+//
+
