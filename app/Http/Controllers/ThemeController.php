@@ -65,16 +65,20 @@ class ThemeController extends Controller
         $theme->save();
         $user=Auth::user();
 
-       // $topic=Topic::find($request->id);
-       // $posts=Post::where('id',$request->id)->get();
+        $p=DB::raw($this->query);
+        $themes=Theme::fromQuery($p);
+        $posts=Post::where('tid','=',$theme->id)->orderByDesc('created_at')->get();
 
-        return view('themes.show')->withUser($user)->withTheme($theme);//->withPosts($posts);
+        return view('themes.show',['topic'=>$theme->topicname])->withUser($user)->withTheme($theme)->withPosts($posts);
+
     }
 
     public function destroy(Theme $theme)
     {
+        $posts=DB::table('posts')->where('tid','=',$theme->id)->delete();
+        $mods=DB::table('mods')->where('tid',$theme->id)->delete();
        $theme=Theme::find($theme->id)->delete();
-       // $posts=Post::where('tid','=',$tid)->delete();
+
         $user=Auth::user();
         $p=DB::raw($this->query);
         $themes=Theme::fromQuery($p);

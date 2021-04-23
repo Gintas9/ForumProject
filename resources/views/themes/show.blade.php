@@ -15,7 +15,7 @@
                     @csrf
                     <hr>
                     <br>
-                    <button class="btn btn-danger">Delete</button>
+                    <button class="btn btn-danger">Delete Theme</button>
                 </form>
                 <form method="POST" action="{{route('mods.store')}}">
                     {{csrf_field()}}
@@ -25,11 +25,24 @@
 
                         <div class="input-group">
 
-                            <input type="text" name="uid" class="form-control" placeholder="id" aria-label="With textarea">
-                            <input type="text" name="level" class="form-control" placeholder="level" aria-label="With textarea">
-                        </div>
 
-                    </div>
+                            <div class="form-group">
+                                <label for="sel1">Select list:</label>
+                                <select name='uid' class="form-control" id="sel1">
+
+                                    @foreach(\App\Http\Controllers\ModsController::getUsersForMods($theme->id) as $user)
+                                    <option value="{{$user->id}}">{{$user->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+
+
+                            <label class="checkbox-inline"><input type="radio" name='level' value="1">Level 1</label>
+                            <label class="checkbox-inline"><input type="radio" name='level' value="2">Level 2</label>
+                            <label class="checkbox-inline"><input type="radio" name='level' value="3">Level 3</label>
+
+                        </div>
                     <div class="col-md-8"><input type="hidden" name="tid" value="{{$theme->id}}" />
                         <input type="submit" value="Add mod" class="btn btn-primary" href="">
 

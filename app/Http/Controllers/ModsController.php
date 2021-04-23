@@ -73,6 +73,16 @@ class ModsController extends Controller
         $users=User::fromQuery($p);
         return $users;
     }
+
+    public static function getUsersForMods($tid){
+        //gets users that are mods of tid
+        $user=Auth::user();
+        $query='select * from users';
+        $p=DB::raw($query);
+        $users=User::fromQuery($p);
+        return $users;
+    }
+
     public static function getUserName($uid){
 
 

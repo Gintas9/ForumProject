@@ -6,7 +6,7 @@
 
             <div class="row justify-content-center topics">
 
-                <form  action="{{route('themes.update',$theme)}}">
+                <form method="POST" action="{{route('themes.update',$theme)}}">
                     @method('PUT') @csrf
 
                     <div class="row">
