@@ -56,7 +56,7 @@ class ModsController extends Controller
         if($isMod == 0) {
             $mod->uid = $request->input('uid');
             $mod->tid = $request->input('tid');
-            $mod->level = 1;
+            $mod->level = $request->input('level');;
             $mod->save();
 
         }

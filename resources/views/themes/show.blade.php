@@ -25,7 +25,8 @@
 
                         <div class="input-group">
 
-                            <input type="text" name="uid" class="form-control" aria-label="With textarea">
+                            <input type="text" name="uid" class="form-control" placeholder="id" aria-label="With textarea">
+                            <input type="text" name="level" class="form-control" placeholder="level" aria-label="With textarea">
                         </div>
 
                     </div>
@@ -87,6 +88,7 @@
                 @foreach(\App\Http\Controllers\ModsController::getUsersMods($theme->id) as $mod)
                     <a href="" class="list-group-item list-group-item-action">
                         {{\App\Http\Controllers\ModsController::getUserName($mod->uid)}}
+                        {{\App\Http\Controllers\ModsController::getMod($mod->uid,$mod->tid)->level}}
                     </a>
 
 
