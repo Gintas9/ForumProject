@@ -23,25 +23,45 @@ class ModsController extends Controller
             return true;
         }
     }
+    public static function isUserPostCreator($pid){
+        $user=Auth::user();
+        $isCreator=DB::table('posts')->where('id','=',$pid)->where('uid','=',$user->id)->count();
+        if($isCreator==0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public static function isUserMod($tid){
+        $user=Auth::user();
+
+        $isCreator=DB::table('mods')->where('tid','=',$tid)->where('uid','=',$user->id)->count();
+        if($isCreator==0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
 
     public function store(Request $request)
     {
-
-        $mod=new Mod();
-
-        $mod->uid=$request->input('uid');
-        $mod->tid=$request->input('tid');
-        $mod->level=1;
-        $mod->save();
-
         $user=Auth::user();
+        $mod=new Mod();
+        $isMod=DB::table('mods')->where('tid','=',$request->input('tid'))->where('uid','=',$request->input('uid'))->count();
+        $p = DB::raw($this->query);
+        $themes = Theme::fromQuery($p);
+        //check for duplicates
+        if($isMod == 0) {
+            $mod->uid = $request->input('uid');
+            $mod->tid = $request->input('tid');
+            $mod->level = 1;
+            $mod->save();
 
-        $p=DB::raw($this->query);
-        $themes=Theme::fromQuery($p);
+        }
         return view('themes.index')->withThemes($themes)->withUser($user);
-
-
-    }
+            }
 
     public static function getUsersMods($tid){
         $user=Auth::user();
@@ -52,11 +72,32 @@ class ModsController extends Controller
     }
     public static function getUserName($uid){
 
-        $query='select * from users where id='.$uid;
-        $p=DB::raw($query);
-        $user=User::fromQuery($p);
+
+        $user=User::find($uid);
         return $user->name;
 
+
+    }
+    public function destroy(Mod $mod)
+    {
+
+        $user=Auth::user();
+        $deleteMod=Mod::table()->where('uid','=',$mod->uid)->where('tid','=',$mod->tid)->delete();
+
+        $p=DB::raw($this->query);
+        $themes=Theme::fromQuery($p);
+
+        return view('themes.index')->withThemes($themes)->withUser($user);
+
+
+    }
+
+    public static function getMod($uid,$tid){
+
+        //$mod=Mod::where('uid','=',$uid)->where('tid','=',$tid)->first();
+        $mod=DB::table('mods')->where('uid',$uid)->first();
+        $mo=$mod;
+       return $mo;
 
     }
 }

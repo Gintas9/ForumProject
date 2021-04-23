@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        Vuotatau
+
 
         {{$user->name}}
         <form method="POST" action="{{route('themes.store')}}">
@@ -25,7 +25,7 @@
 
         </div>
         <div class="col-md-8">
-            <input type="submit" value="Submit" class="btn btn-primary" href="">Submit</input>
+            <input type="submit" value="Submit" class="btn btn-primary" href=""></input>
         </div>
         </form>
     </div>

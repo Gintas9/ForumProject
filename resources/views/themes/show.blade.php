@@ -10,10 +10,7 @@
                 <a href="{{route('themes.edit',$theme)}}" class="btn btn-warning">Edit Topic</a>
 
 
-                <form action="{{route('themes.destroy',$theme)}}" method="POST">
-                    <input type="hidden" name="_method" value="DELETE" />  {{ csrf_field() }}
 
-                </form>
                 <form action="{{route('themes.destroy',$theme)}}" method="POST">
                     @method('DELETE')
                     @csrf
@@ -44,6 +41,9 @@
                     <p class="lead">{{$theme->description}}</p>
                 </div>
             </div>
+
+                <br>
+                <br>
                 <div class="row justify-content-center topics">
 
                     <form action="{{route('posts.store')}}" method="POST" >
@@ -84,8 +84,15 @@
         <div class="container">
             <h1>Mods</h1>
             <div class="list-group">
-                @foreach(\App\Http\Controllers\ModsController::getUsersMods($theme->id) as $usr)
-                    <a href="" class="list-group-item list-group-item-action">{{$usr->uid}}</a>
+                @foreach(\App\Http\Controllers\ModsController::getUsersMods($theme->id) as $mod)
+                    <a href="" class="list-group-item list-group-item-action">
+                        {{\App\Http\Controllers\ModsController::getUserName($mod->uid)}}
+                    </a>
+
+
+
+
+
                 @endforeach
             </div>
         </div>
