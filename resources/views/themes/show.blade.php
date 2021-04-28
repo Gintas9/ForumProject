@@ -80,13 +80,22 @@
 
             <div class="container">
                 <h1>Posts</h1>
+                <br><br>
                 <div class="list-group">
 
+                @if(\App\Models\Post::hasPosts())
 
                     @foreach($posts as $post)
                         <a href="{{route('posts.show',$post)}}" class="list-group-item list-group-item-action">{{$post->title}}</a>
                     @endforeach
+                    @else
+                    <div class="alert alert-danger">
+                    <h1>No Posts Yet!</h1>
+                    </div>
+                    @endif
+
                 </div>
+                <br><br>
             </div>
 
         </div>
