@@ -26,8 +26,17 @@ class ModsController extends Controller
     }
     public static function isUserPostCreator($pid,$uid){
         //checks if user is post creator
-        //$user=Auth::user();
+
         $isCreator=DB::table('posts')->where('id','=',$pid)->where('uid','=',$uid)->count();
+        if($isCreator==0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    public static function isUserThemeCreator($tid,$uid){
+        $user=Auth::user();
+        $isCreator=DB::table('themes')->where('id','=',$tid)->where('owner','=',$user->id)->count();
         if($isCreator==0){
             return false;
         }else{
