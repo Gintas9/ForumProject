@@ -9,21 +9,23 @@
 
             <div class="row justify-content-center topics">
 
-                <form action="{{route('posts.update',$post)}}" method="POST">
+                <form action="{{route('comments.update',$comment)}}" method="POST">
                     @csrf
                     @method('PUT')
-
 
                     <input type="hidden" name="_method" value="PUT">
                     <div class="row">
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Title" name="title" value="{{$post->title}}">
-                            <input type="text" class="form-control" placeholder="Text" name="text" value="{{$post->text}}">
-
-
-                            <button class="btn btn-danger">edit post</button>
+                            <input type="text" class="form-control" placeholder="Title" name="text" value="{{$comment->text}}">
+                            <button class="btn btn-warning">Edit Comment</button>
                         </div>
                     </div>
+                </form>
+                 <form action="{{route('comments.destroy',$comment)}}" method="POST">
+                    @method('DELETE')
+                    @csrf
+
+                    <button class="btn btn-danger">Delete</button>
                 </form>
 
 
