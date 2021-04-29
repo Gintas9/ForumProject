@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
+    @if(Auth::user()->id == 1)
        <h5 class="display-6"> Themes: </h5>
        <table class="table">
           <thead>
@@ -24,29 +25,19 @@
               <td>{{$theme->created_at}}</td>
 
                   <td>
-
-                      @if($theme->block == 0)
-                      {{$theme->block}}
-                      @elseif($theme->block == 1)
+                      @if($theme->blocked)
                       Yes
-                          @endif
-
-
-
-
+                      @else
+                      No
+                     @endif
                   </td>
                   <td>
-
                       <form action="{{route('superusertid',$theme) }}" method="POST">
                           @method('POST')
                           @csrf
-
                           <button class="btn btn-danger">Block/Unblock</button>
                       </form>
-
                   </td>
-
-
             </tr>
             @endforeach
           </tbody>
@@ -72,21 +63,27 @@
               <td>{{$user->name}}</td>
               <td>{{$user->email}}</td>
               <td>{{$user->created_at}}</td>
-              @if($user->blocked == 1)
-                  <td>Yes</td>
-                   <td>
-                    <a href="#" class="btn btn-warning">Unblock</a>
-                  </td>
-                  @else
-                  <td>No</td>
-                   <td>
-                    <a href="#" class="btn btn-danger">Block</a>
-                  </td>
-              @endif
+              <td>
+                      @if($user->blocked)
+                      Yes
+                      @else
+                      No
+                     @endif
+              </td>
+              <td>
+                <form action="{{route('superuseruid',$user) }}" method="POST">
+                    @method('POST')
+                    @csrf
+                    <button class="btn btn-danger">Block/Unblock</button>
+                </form>
+              </td>
             </tr>
             @endforeach
           </tbody>
        </table>
 
      </div>
+     @else
+     <h1>You are not admin<h1>
+     @endif
 @endsection

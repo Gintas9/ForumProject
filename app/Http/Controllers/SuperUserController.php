@@ -23,29 +23,36 @@ class SuperUserController extends Controller
      public static function tblock(Theme $theme)
     {
 
-       if($theme->blocked == 0)
+       if($theme->blocked)
         {
-         $theme->blocked=1;
+         $theme->blocked = false;
         }
-        else {$theme->blocked=0;}
-      //  $theme->update($theme->blocked);
+        else {$theme->blocked = true;}
         $theme->update();
         $theme->save();
         $users=User::all();
         $themes=Theme::all();
 
-       //return redirect(Request::url());
         return redirect()->route('superuser')->withThemes($themes)->withUsers($users);
-        //return redirect()->action([HomeController::class, 'index']);
-     //  return view('superuser.super')->withThemes($themes)->withUsers($users);
     }
 
-    public static function isTblock(Theme $theme)
+    public static function ublock(User $user)
     {
-        if($theme->block == 0){
-            return "No";}
-        else {return "Yes";}
+
+       if($user->blocked)
+        {
+         $user->blocked = false;
+        }
+        else {$user->blocked = true;}
+        $user->update();
+        $user->save();
+        $users=User::all();
+        $themes=Theme::all();
+
+        return redirect()->route('superuser')->withThemes($themes)->withUsers($users);
     }
+
+    
 
 
 }

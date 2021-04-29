@@ -18,7 +18,7 @@ class CreateTheme extends Migration
             $table->string('topicname');
             $table->text('description');
             $table->integer('owner');
-            $table->integer('blocked')->default('0');
+            $table->boolean('blocked')->default(false);
             $table->timestamps();
         });
     }

@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+@if(Auth::user()->blocked)
+    <h1>You Are Blocked By Admin<h1>
+@else
 <div class="container">
     <div class="row justify-content-center">
         @if(Auth::user()->id == 1)
@@ -39,4 +42,5 @@
         </div>
     </div>
 </div>
+@endif
 @endsection
