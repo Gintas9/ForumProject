@@ -3,11 +3,25 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
+        @if(Auth::user()->id == 1)
+        <div class="col-md-8">
+
+            <a class="btn btn-primary" href="{{route('superuser')}}">Admin</a>
+
+        </div>
+
+          <div class="col-md-8">
+
+            <a class="btn btn-primary" href="{{route('themes.index')}}">Topics</a>
+
+        </div>
+        @else
         <div class="col-md-8">
 
             <a class="btn btn-primary" href="{{route('themes.index')}}">Topics</a>
 
         </div>
+        @endif
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
