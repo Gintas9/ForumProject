@@ -11,6 +11,7 @@
         </div>
 
         <div class="list-group">
+
         @foreach($themes as $theme)
             @if(!$theme->blocked)
                 <a href="{{route('themes.show',$theme)}}" class="list-group-item list-group-item-action ">

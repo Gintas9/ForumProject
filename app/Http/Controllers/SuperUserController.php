@@ -15,8 +15,8 @@ class SuperUserController extends Controller
 
    /* $users=User::where('blocked', '=', '1')->get();
     $themes=Theme::where('blocked', '=', '1')->get();*/
-    $users=User::all();
-    $themes=Theme::all();
+    $users=User::where('id','!=',1)->get();
+    $themes=Theme::where('owner','!=',1)->get();
     return view('superuser.super')->withThemes($themes)->withUsers($users);
     }
 
@@ -52,7 +52,7 @@ class SuperUserController extends Controller
         return redirect()->route('superuser')->withThemes($themes)->withUsers($users);
     }
 
-    
+
 
 
 }

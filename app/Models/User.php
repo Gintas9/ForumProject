@@ -41,7 +41,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public static function getUser($id){
 
+        $user=User::find($id);
+
+        return $user;
+
+    }
 
 
 
