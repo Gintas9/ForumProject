@@ -22,18 +22,36 @@
               <td>{{\App\Http\Controllers\CommentController::getName($theme->owner)}}</td>
               <td>{{$theme->owner}}</td>
               <td>{{$theme->created_at}}</td>
-              
-                  <td>{{\App\Http\Controllers\SuperUserController::isTblock($theme)}}</td>
+
                   <td>
-                    <a class="btn btn-primary" href="{{\App\Http\Controllers\SuperUserController::tblock($theme)}}" role="button">Block/Unblock</a>
-                  </td>                 
-                  
-           
+
+                      @if($theme->block == 0)
+                      {{$theme->block}}
+                      @elseif($theme->block == 1)
+                      Yes
+                          @endif
+
+
+
+
+                  </td>
+                  <td>
+
+                      <form action="{{route('superusertid',$theme) }}" method="POST">
+                          @method('POST')
+                          @csrf
+
+                          <button class="btn btn-danger">Block/Unblock</button>
+                      </form>
+
+                  </td>
+
+
             </tr>
             @endforeach
           </tbody>
        </table>
-       
+
 
        <h5 class="display-6"> Users: </h5>
         <table class="table">
