@@ -8,7 +8,9 @@
 
         <div class="col-md-8">
 
-            @if( \App\Http\Controllers\ModsController::isUserPostCreator($post->id) || \App\Http\Controllers\ModsController::isUserMod($post->tid))
+            @if( \App\Http\Controllers\ModsController::isUserPostCreator($post->id,$user->id) ||
+            \App\Http\Controllers\ModsController::isUserMod($post->tid) ||
+            \App\Http\Controllers\ModsController::isUserThemeCreator(\App\Models\Theme::getTheme($post->tid)->id,$post->uid))
 
                 <a href="{{route("posts.edit",$post)}}" class="btn btn-warning">Edit Post</a>
 
