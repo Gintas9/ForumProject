@@ -1,29 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-@if(Auth::user()->blocked)
-    <h1>You Are Blocked By Admin<h1>
-@else
 <div class="container">
-
-    <div class="row justify-content-center">
-        @if(Auth::user()->id == 1)
-        <div class="col-md-8">
-
-            <a class="btn btn-primary" href="{{route('superuser')}}">Admin</a>
-
-        </div>
-
-          <div class="col-md-8">
-
-            <a class="btn btn-primary" href="{{route('themes.index')}}">Topics</a>
-
-        </div>
-        @else
-        <div class="col-md-8">
-
-
-
+    <div class="row justify-content-right">
+        <div class="col-12">
 
             <a class="btn btn-primary" href="{{route('themes.index')}}">Topics</a>
             <a class="btn btn-danger" href="">Notifications: 1</a>
@@ -31,10 +11,6 @@
             <a class="btn btn-secondary" href="">Profile</a>
 
         </div>
-
-        @endif
-     
-
 
         </div>
     </div>
@@ -70,5 +46,4 @@
 
 </div>
 </div>
-@endif
 @endsection

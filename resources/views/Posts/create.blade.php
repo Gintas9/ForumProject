@@ -1,8 +1,5 @@
 @extends('layouts.app')
 @section('content')
-@if(Auth::user()->blocked)
-    <h1>You Are Blocked By Admin<h1>
-@else
     <div class="container">
 
 
@@ -23,5 +20,4 @@
             </form>
         </div>
     </div>
-@endif
 @endsection

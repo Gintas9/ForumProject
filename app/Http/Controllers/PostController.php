@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Theme;
 use App\Models\Post;
-use App\Models\User;
-use App\Models\Comment;
 use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
@@ -30,6 +28,8 @@ class PostController extends Controller
         $post->save();
         // $theme=Theme::find($post->tid);
         $user=Auth::user();
+
+
 
         $theme=Theme::find($request->input('tid'));
         $posts=Post::where('tid','=',$request->input('tid'))->orderByDesc('created_at')->get();
@@ -61,12 +61,11 @@ class PostController extends Controller
     }
     public function show(Post $post)
     {
-        $comments=Comment::where('pid', '=', $post->id)->orderByDesc('created_at')->get();
+
         $user=Auth::user();
         $theme=Theme::find($post->tid);
-        $users=User::all();
 
-        return view('Posts.show')->withPost($post)->withUser($user)->withTheme($theme)->withComments($comments)->withUsers($users);
+        return view('Posts.show')->withPost($post)->withUser($user)->withTheme($theme);
     }
     public function edit(Post $post)
     {

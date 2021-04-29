@@ -40,16 +40,10 @@ Route::get('/home', [App\Http\Controllers\PagesController::class, 'gotoMainPage'
 Route::group(['middleware'=>['auth']],function(){
 //Cia rasosi visi raoutai
 
-    Route::get('/superuser', [App\Http\Controllers\SuperUserController::class, 'superScreen'])->name('superuser');
-    Route::post('/superuser/theme/{theme}', [App\Http\Controllers\SuperUserController::class, 'tblock'])->name('superusertid');
-    Route::post('/superuser/user/{user}', [App\Http\Controllers\SuperUserController::class, 'ublock'])->name('superuseruid');
 
-    //Route::post('/superuser', function (Request $request){}, [App\Http\Controllers\SuperUserController::class, 'tblock'])->name('super.tblock');
     Route::resource('themes','App\Http\Controllers\ThemeController');
-   // Route::resource('supers','App\Http\Controllers\SuperUserController');
     Route::resource('posts','App\Http\Controllers\PostController');
     Route::resource('mods','App\Http\Controllers\ModsController');
-    Route::resource('comments','App\Http\Controllers\CommentController');
 
 
 
