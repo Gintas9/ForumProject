@@ -31,8 +31,25 @@ class Theme extends Model
 
     }
 
+    public static function hasThemes(){
+        $query='select * from themes';
+        $user=Auth::user();
+        $p=DB::raw($query);
+        $themes=Theme::fromQuery($p)->count();
+        if ($themes==0) {
+            return false;
+        }else{
+            return true;
+        }
+    }
 
+    public static function getTheme($id){
 
+        $theme=Theme::find($id);
+
+            return $theme;
+
+    }
 
 
 }
