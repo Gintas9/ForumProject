@@ -31,6 +31,17 @@ class Theme extends Model
 
     }
 
+    public static function isUserThemeCreator(Theme $theme){
+        $user=Auth::user();
+        if($user->id==$theme->owner){
+            return true;
+        }else{
+            return false;
+        }
+
+
+    }
+
 
 
 

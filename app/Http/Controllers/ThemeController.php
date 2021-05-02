@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Theme;
@@ -75,15 +76,20 @@ class ThemeController extends Controller
 
     public function destroy(Theme $theme)
     {
-        $posts=DB::table('posts')->where('tid','=',$theme->id)->delete();
+
         $mods=DB::table('mods')->where('tid',$theme->id)->delete();
+       $coms=DB::table('comments')->join('posts','comments.pid','=',
+       'posts.id')->where('posts.tid','=',$theme->id)->delete();
+        $posts=DB::table('posts')->where('tid','=',$theme->id)->delete();
        $theme=Theme::find($theme->id)->delete();
+
 
         $user=Auth::user();
         $p=DB::raw($this->query);
         $themes=Theme::fromQuery($p);
         return redirect()->route('themes.index')->withUser($user)->withThemes($themes)->withMessage('Theme Deleted');
     }
-
+//select * from comments c join posts p where c.pid=p.id and p.tid=1;
+//select * from comments c join posts p where c.pid=p.id
 
 }

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 @if(Auth::user()->blocked)
-    <h1>You Are Blocked By Admin<h1>
+    <h1>You Are Blocked By Admin</h1>
 @else
 @if(!$theme->blocked)
     <div class="container">
@@ -21,6 +21,7 @@
                     <br>
                     <button class="btn btn-danger">Delete Theme</button>
                 </form>
+
                 <form method="POST" action="{{route('mods.store')}}">
                     {{csrf_field()}}
 
@@ -53,6 +54,27 @@
                     </div>
                 </form>
             @endif
+
+            @if(!\App\Http\Controllers\FollowerController::isFollower($theme))
+                <form action="{{route('makeFollower',$theme) }}" method="POST">
+                    @method('POST')
+                    @csrf
+                    <button class="btn btn-primary">Follow</button>
+                </form>
+                @else
+
+                    <form action="{{route('deleteFollower',$theme) }}" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <button class="btn btn-danger">Unfollow</button>
+                    </form>
+
+
+
+
+                @endif
+                <h3>{{ \App\Http\Controllers\FollowerController::followerCount($theme) }} Followers</h3>
+
             <div class="jumbotron jumbotron-fluid">
                 <div class="container">
                     <h1 class="display-4">{{$theme->topicname}}</h1>
@@ -121,7 +143,7 @@
 
     </div>
     @else
-    <h1>Theme is blocked by administrator</h>
+    <h1>Theme is blocked by administrator</h1>
     @endif
 @endif
 @endsection

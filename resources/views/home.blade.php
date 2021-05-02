@@ -49,8 +49,12 @@
                             </div>
                         </div>
                     @endforeach
-
-
+                    @if(!\App\Http\Controllers\PagesController::AnyPosts())
+                            <div class="alert alert-danger" role="alert">
+                                No Posts yet! Try Following Some Themes :)
+                            </div>
+                    @endif
+                        {{ $posts->links('pagination::bootstrap-4')}}
                 </div>
 
 

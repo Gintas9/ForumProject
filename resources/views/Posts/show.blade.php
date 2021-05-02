@@ -8,7 +8,7 @@
 
         <div class="col-md-8">
 
-            @if( \App\Http\Controllers\ModsController::isUserPostCreator($post->id) || \App\Http\Controllers\ModsController::isUserMod($post->tid))
+            @if( \App\Http\Controllers\ModsController::isUserPostCreator($post->id) || \App\Http\Controllers\ModsController::isUserMod($post->tid) || \App\Models\Theme::isUserThemeCreator($theme))
 
                 <a href="{{route("posts.edit",$post)}}" class="btn btn-warning">Edit Post</a>
 
@@ -19,6 +19,8 @@
                     <button class="btn btn-danger">Delete</button>
                 </form>
             @endif
+
+
                 <br>
                 <br>
                 <br>
@@ -35,7 +37,7 @@
                      @foreach($comments as $comment)
                         @if(Auth::user()->id == $comment->uid)
                             <a href="{{route('comments.show', $comment)}}">
-                            <h8 class="display-8">{{$comment->text}} |  </h8>                        
+                            <h8 class="display-8">{{$comment->text}} |  </h8>
                             <h8 class="display-8">{{\App\Http\Controllers\CommentController::getName($comment->uid)}}</h8>
                             <br>
                             </a>
@@ -43,7 +45,7 @@
                             <h8 class="display-8">{{$comment->text}} |  </h8>
                             <h8 class="display-8">{{\App\Http\Controllers\CommentController::getName($comment->uid)}}</h8>
                             <br>
-                        @endif 
+                        @endif
                       @endforeach
                     </div>
                 </div>

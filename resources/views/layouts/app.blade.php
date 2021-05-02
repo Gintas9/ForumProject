@@ -19,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css/mano.css') }}" rel="stylesheet">
 
 </head>
 <body>

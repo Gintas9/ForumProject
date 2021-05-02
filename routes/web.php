@@ -40,6 +40,8 @@ Route::group(['middleware'=>['auth']],function(){
     Route::post('/superuser/theme/{theme}', [App\Http\Controllers\SuperUserController::class, 'tblock'])->name('superusertid');
     Route::post('/superuser/user/{user}', [App\Http\Controllers\SuperUserController::class, 'ublock'])->name('superuseruid');
 
+    Route::post('/theme/follower/create/{theme}', [App\Http\Controllers\FollowerController::class, 'MakeFollower'])->name('makeFollower');
+    Route::delete('/theme/follower/delete/{theme}', [App\Http\Controllers\FollowerController::class, 'DeleteFollower'])->name('deleteFollower');
     //Route::post('/superuser', function (Request $request){}, [App\Http\Controllers\SuperUserController::class, 'tblock'])->name('super.tblock');
     Route::resource('themes','App\Http\Controllers\ThemeController');
    // Route::resource('supers','App\Http\Controllers\SuperUserController');

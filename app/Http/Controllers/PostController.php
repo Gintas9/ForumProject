@@ -51,7 +51,7 @@ class PostController extends Controller
         $post=Post::find($post->id);
         $user=Auth::user();
         $deletePost=Post::find($post->id)->delete();
-
+        $deleteComment=Comment::where('pid',$post->id)->delete();
         $p=DB::raw($this->query);
         $themes=Theme::fromQuery($p);
 
