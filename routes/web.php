@@ -48,6 +48,7 @@ Route::group(['middleware'=>['auth']],function(){
     Route::resource('posts','App\Http\Controllers\PostController');
     Route::resource('mods','App\Http\Controllers\ModsController');
     Route::resource('comments','App\Http\Controllers\CommentController');
+    Route::resource('profiles','App\Http\Controllers\ProfileController');
 
 
 

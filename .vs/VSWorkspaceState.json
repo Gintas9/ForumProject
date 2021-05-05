@@ -12,6 +12,6 @@
     "\\resources\\views\\superuser",
     "\\routes"
   ],
-  "SelectedNode": "\\resources\\views\\Posts\\show.blade.php",
+  "SelectedNode": "\\resources\\views\\Comments\\edit.blade.php",
   "PreviewInSolutionExplorer": false
 }

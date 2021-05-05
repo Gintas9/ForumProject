@@ -12,12 +12,14 @@
 
                 <a href="{{route("posts.edit",$post)}}" class="btn btn-warning">Edit Post</a>
 
-                <form action="{{route('posts.destroy',$post)}}" method="POST">
+                <form onsubmit="return confirm('Do you really want to delete this post?');" action="{{route('posts.destroy',$post)}}" method="POST">
                     @method('DELETE')
                     @csrf
 
                     <button class="btn btn-danger">Delete</button>
+                    
                 </form>
+             
             @endif
 
 
@@ -66,6 +68,17 @@
             <div class="col-md-8">
                 <input type="submit" value="Submit" class="btn btn-primary" href=""></input>
             </div>
+             @if(count($errors))
+                            <div class="form-group">
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach($errors->all() as $error)
+                                            <li>{{$error}}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                          @endif
         </form>
 
     </div>

@@ -20,12 +20,24 @@
                             <button class="btn btn-warning">Edit Comment</button>
                         </div>
                     </div>
+
                 </form>
-                 <form action="{{route('comments.destroy',$comment)}}" method="POST">
+                 <form onsubmit="return confirm('Do you really want to delete this comment?');" action="{{route('comments.destroy',$comment)}}" method="POST">
                     @method('DELETE')
                     @csrf
 
                     <button class="btn btn-danger">Delete</button>
+                       @if(count($errors))
+                            <div class="form-group">
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach($errors->all() as $error)
+                                            <li>{{$error}}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                          @endif
                 </form>
 
 

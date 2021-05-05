@@ -40,6 +40,11 @@ class ThemeController extends Controller
     }
     public function store(Request $request){
 
+        $this->validate($request,array(
+            'topicname' =>'required|unique:themes,topicname|max:100|min:5',
+            'description' => 'required|max:255'
+        ));
+
         $user=Auth::user();
         $theme = new Theme();
         $theme->topicname=$request->input("topicname");
@@ -58,7 +63,7 @@ class ThemeController extends Controller
     public function update(Request $request, Theme $theme)
     {
         $this->validate($request,array(
-            'topicname' =>'required|max:255',
+            'topicname' =>'required|unique:themes,topicname|max:100|min:5',
             'description' => 'required|max:255'
         ));
         $theme->topicname=$request->topicname;

@@ -18,7 +18,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,array(
-            'title' =>'required|max:255',
+            'title' =>'required|max:255|min:5',
             'text' => 'required'
         ));
         $post=new Post();
@@ -75,7 +75,12 @@ class PostController extends Controller
     }
 
     public function update(Request $request, Post $post)
-    {   $user=Auth::user();
+    {
+        $this->validate($request,array(
+            'title' =>'required|max:255|min:5',
+            'text' => 'required'
+        ));
+        $user=Auth::user();
 
         $post->update($request->all());
 

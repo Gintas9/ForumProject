@@ -20,6 +20,17 @@
                         <input type="submit" value="Submit New Post">
                     </div>
                 </div>
+                    @if(count($errors))
+                            <div class="form-group">
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach($errors->all() as $error)
+                                            <li>{{$error}}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                          @endif
             </form>
         </div>
     </div>

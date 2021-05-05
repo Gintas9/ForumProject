@@ -46,7 +46,7 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,array(
-            'text' => 'required'
+            'text' => 'required|min:5|max:255'
         ));
         $comment = new Comment();
         $comment->pid=$request->input('pid');
@@ -97,6 +97,9 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
+        $this->validate($request,array(
+            'text' => 'required|min:5|max:255'
+        ));
         $comment->update($request->all());
         $comment->save();
 

@@ -14,7 +14,7 @@
 
 
 
-                <form action="{{route('themes.destroy',$theme)}}" method="POST">
+                <form onsubmit="return confirm('Do you really want to delete topic?');" action="{{route('themes.destroy',$theme)}}" method="POST">
                     @method('DELETE')
                     @csrf
                     <hr>
@@ -97,7 +97,17 @@
                                 <input type="hidden" name="tid" value="{{$theme->id}}" />
 
                                     <button class="btn btn-danger">create post</button>
-
+                         @if(count($errors))
+                            <div class="form-group">
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach($errors->all() as $error)
+                                            <li>{{$error}}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                          @endif
                     </form>
                 </div>
 
