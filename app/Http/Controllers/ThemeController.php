@@ -94,7 +94,6 @@ class ThemeController extends Controller
         $themes=Theme::fromQuery($p);
         return redirect()->route('themes.index')->withUser($user)->withThemes($themes)->withMessage('Theme Deleted');
     }
-//select * from comments c join posts p where c.pid=p.id and p.tid=1;
-//select * from comments c join posts p where c.pid=p.id
+
 
 }

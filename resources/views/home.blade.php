@@ -44,11 +44,34 @@
                                 <h2 class="card-title"><a href="{{route('posts.show',$post)}}">{{$post->title}}</a></h2>
                                 <a href="{{ route('themes.show',\App\Models\Theme::getTheme($post->tid))}}"><p>{{ \App\Models\Theme::getTheme($post->tid)->topicname}}</p></a>
                                 <p class="card-text">{{substr($post->text,0,50)}}</p>
-                                By <a href="" class="">{{\App\Models\User::getUser($post->uid)->name }}</a>
+
 
                             </div>
+
+                        @if(!\App\Http\Controllers\LikedPostController::isPostLiked($post))
+                                <form action="{{route('likePostHome',$post) }}" method="POST">
+                                    @method('POST')
+                                    @csrf
+                                    <button class="btn btn-primary">Like</button>
+                                </form>
+
+
+                            @else
+
+                                <form action="{{route('unlikePostHome',$post) }}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button class="btn btn-danger">Unlike</button>
+                                </form>
+
+                            @endif
+
                         </div>
+                        <span class="badge rounded-pill bg-danger">Likes: {{\App\Http\Controllers\LikedPostController::postLikeCount($post)}}</span>
+
+
                     @endforeach
+
                     @if(!\App\Http\Controllers\PagesController::AnyPosts())
                             <div class="alert alert-danger" role="alert">
                                 No Posts yet! Try Following Some Themes :)

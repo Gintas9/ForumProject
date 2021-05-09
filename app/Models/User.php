@@ -43,9 +43,9 @@ class User extends Authenticatable
 
     public static function getUser($id){
 
-        $user=User::find($id);
+        $usr=User::find($id);
 
-        return $user;
+        return $usr;
 
     }
 

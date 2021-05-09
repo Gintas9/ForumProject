@@ -49,6 +49,22 @@ Route::group(['middleware'=>['auth']],function(){
     Route::resource('mods','App\Http\Controllers\ModsController');
     Route::resource('comments','App\Http\Controllers\CommentController');
     Route::resource('profiles','App\Http\Controllers\ProfileController');
+    //Route::resource('likedposts','App\Http\Controllers\LikedPostController');
+    Route::resource('likedcomments', 'App\Http\Controllers\LikedCommentController');
+
+    Route::post('/post/newlike/{post}', [App\Http\Controllers\LikedPostController::class, 'store'])->name('likePost');
+    Route::delete('/post/unlike/{post}', [App\Http\Controllers\LikedPostController::class, 'destroy'])->name('unlikePost');
+
+    Route::post('/post/newlikehome/{post}', [App\Http\Controllers\LikedPostController::class, 'storehome'])->name('likePostHome');
+    Route::delete('/post/unlikehome/{post}', [App\Http\Controllers\LikedPostController::class, 'destroyhome'])->name('unlikePostHome');
+
+
+    Route::post('/comment/newlike/{post}/{comment}', [App\Http\Controllers\LikedCommentController::class, 'store'])->name('likeComment');
+    Route::delete('/comment/unlike/{post}/{comment}', [App\Http\Controllers\LikedCommentController::class, 'destroy'])->name('unlikeComment');
+    Route::post('/comment/newlikeshow/{post}/{comment}', [App\Http\Controllers\LikedCommentController::class, 'storeshow'])->name('likeCommentshow');
+    Route::delete('/comment/unlikeshow/{post}/{comment}', [App\Http\Controllers\LikedCommentController::class, 'destroyshow'])->name('unlikeCommentshow');
+
+
 
 
 
