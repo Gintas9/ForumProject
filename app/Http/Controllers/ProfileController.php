@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Theme;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\LikedPost;
 use App\Models\Follower;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -155,6 +156,67 @@ class ProfileController extends Controller
         $post=Post::find($id);
        
         return $post->title;
+    }
+
+    public function shownotif($id)
+    {
+        $user=Auth::user();
+        $posts=Post::where('uid', '=', $user->id)->get();
+        return view('Profile.notifications')->withUser($user)->withPosts($posts);
+    }
+
+     public static function isFirstLike($id)
+    {
+        $post=Post::find($id);
+        $likes=LikedPost::where('pid', '=', $post->id)->count();
+        if($likes == 1)
+            return true;
+        else return false;
+    }
+
+    public static function isMilestone($id)
+    {
+       $post=Post::find($id);
+       $likes=LikedPost::where('pid', '=', $post->id)->count();
+        if($likes % 10 == 0 && $likes != 0)
+            return true;
+        else return false;
+    }
+
+     public static function likeNum($pid)
+    {  
+       $liked=LikedPost::where('pid', '=', $pid)->count();
+       return $liked;
+    }
+
+    public static function whoLikedFirst($pid)
+    {
+        
+       $liked=LikedPost::where('pid', '=', $pid)->first();
+       $user=User::find($liked->uid);
+
+        return $user->name;
+    }
+      public static function whenLikedFirst($pid)
+    {
+        
+       $liked=LikedPost::where('pid', '=', $pid)->first();
+       return $liked->created_at;
+    }
+
+    public static function checkNotif()
+    {
+        $user=Auth::user();
+        $posts=Post::where('uid', '=', $user->id)->get();
+        $count = 0;
+        foreach($posts as $post)
+        {
+            if((LikedPost::where('pid', '=', $post->id)->count() != 0 && LikedPost::where('pid', '=', $post->id)->count() == 1) ||
+            (LikedPost::where('pid', '=', $post->id)->count() % 10 == 0 && LikedPost::where('pid', '=', $post->id)->count() != 0))
+                $count+=1;
+        }
+        if($count > 0) return true;
+            else return false;
     }
 
 

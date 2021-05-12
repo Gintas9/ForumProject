@@ -11,8 +11,8 @@
                     <div class="col-12">
 
                         <a class="btn btn-primary" href="{{route('themes.index')}}">Topics</a>
-                        <a class="btn btn-danger" href="">Notifications: 1</a>
-                        <a class="btn btn-success" href="">Rising Posts</a>
+                        <a class="btn btn-danger" href="{{route('notifications',Auth::user()->id )}}">Notifications</a>
+                        <a class="btn btn-success" href="{{route('risingpost')}}">Rising Post</a>
                         <a class="btn btn-secondary" href="{{route('profiles.show',Auth::user()->id )}}">Profile</a>
                         @if(Auth::user()->id == 1)   <a class="btn btn-primary" href="{{route('superuser')}}">Admin</a>  @endif
 

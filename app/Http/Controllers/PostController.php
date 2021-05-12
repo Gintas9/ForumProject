@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Theme;
+use \Carbon\Carbon;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\LikedPost;
 use App\Models\Comment;
 use Illuminate\Support\Facades\DB;
 
@@ -92,6 +94,57 @@ class PostController extends Controller
 
         return view('themes.index')->withThemes($themes)->withUser($user);
 
+    }
+
+    public function risingPost()
+    {
+        //$posts = Post::whereDate('created_at', Carbon::today())->get();
+       // $liked=LikedPost::whereDate('created_at', Carbon::today())->get();
+       $posts=Post::all();
+       return view('Posts.rising')->withPosts($posts);
+    }
+
+    public static function numLikedToday()
+    {
+        $liked=LikedPost::whereDate('created_at', Carbon::today())->count();
+        if($liked > 0)
+            return true;
+        else return false;
+    }
+
+    public static function mostLikedToday()
+    {
+        $count = 0;
+        $bid = 0;
+        $posts = Post::all();
+        foreach($posts as $post)
+            {
+                $liked=LikedPost::where('pid','=', $post->id)->whereDate('created_at', Carbon::today())->count();
+                if($liked > $count)
+                    $bid = $post->id;
+            }
+    
+        return $bid;
+    }
+
+    public static function getRisingTitle()
+    {   
+       return Post::find(PostController::mostLikedToday())->title;
+    }
+    public static function getRisingTopicName()
+    {
+       $tid = Post::find(PostController::mostLikedToday())->tid;
+       return Theme::find($tid)->topicname;
+    }
+    public static function likeNum()
+    {
+       //$tid = Post::find(PostController::mostLikedToday())->tid;
+       return LikedPost::where('pid','=',PostController::mostLikedToday())->count();
+    }
+    public static function getRisingOwner()
+    {
+      
+       return User::find(Post::find(PostController::mostLikedToday())->uid)->name;
     }
 
 }

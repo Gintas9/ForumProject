@@ -2,16 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\app",
-    "\\app\\Models",
-    "\\database",
-    "\\database\\migrations",
+    "\\app\\Http",
+    "\\app\\Http\\Controllers",
+    "\\app\\Http\\Controllers\\Auth",
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\Comments",
-    "\\resources\\views\\Posts",
-    "\\resources\\views\\superuser",
-    "\\routes"
+    "\\resources\\views\\layouts",
+    "\\resources\\views\\Profile"
   ],
-  "SelectedNode": "\\resources\\views\\Comments\\edit.blade.php",
+  "SelectedNode": "\\app\\Http\\Controllers\\PostController.php",
   "PreviewInSolutionExplorer": false
 }

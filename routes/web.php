@@ -26,10 +26,10 @@ Auth::routes();
 
 //
 
-Auth::routes();
+//Auth::routes();
 
-
-Auth::routes();
+//
+//Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\PagesController::class, 'gotoMainPage'])->name('home');
 
@@ -63,6 +63,8 @@ Route::group(['middleware'=>['auth']],function(){
     Route::delete('/comment/unlike/{post}/{comment}', [App\Http\Controllers\LikedCommentController::class, 'destroy'])->name('unlikeComment');
     Route::post('/comment/newlikeshow/{post}/{comment}', [App\Http\Controllers\LikedCommentController::class, 'storeshow'])->name('likeCommentshow');
     Route::delete('/comment/unlikeshow/{post}/{comment}', [App\Http\Controllers\LikedCommentController::class, 'destroyshow'])->name('unlikeCommentshow');
+    Route::get('/profiles/notifications/{user}', [App\Http\Controllers\ProfileController::class, 'shownotif'])->name('notifications');
+    Route::get('/risingpost', [App\Http\Controllers\PostController::class, 'risingPost'])->name('risingpost');
 
 
 
